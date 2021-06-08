@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/plaid/plaid-go/internal/release"
+	"github.com/flyline-development/flyline-go/internal/release"
 	"github.com/spf13/cobra"
 )
 
 func main() {
 	rootCmd := &cobra.Command{
 		Use:   "internal",
-		Short: "Internal CLI for development of the plaid-go library",
+		Short: "Internal CLI for development of the flyline-go library",
 	}
 
 	rootCmd.AddCommand(releaseCmd)

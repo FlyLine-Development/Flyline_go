@@ -52,6 +52,6 @@ Each endpoint returns an object which contains the parsed JSON from the HTTP res
 
 ## Support
 
-Open an [issue](https://github.com/plaid/plaid-go/issues/new)!
+Open an [issue](https://github.com/flyline-development/flyline-go/issues/new)!
 
 ## License

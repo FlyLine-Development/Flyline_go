@@ -11,5 +11,5 @@ type Error struct {
 }
 
 func (e Error) Error() string {
-	return fmt.Sprintf("Plaid Error - http status: %d", e.StatusCode)
+	return fmt.Sprintf("Flyline Error - http status: %d", e.StatusCode)
 }

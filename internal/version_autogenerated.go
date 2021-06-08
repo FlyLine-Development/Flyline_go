@@ -1,6 +1,6 @@
 package internal
 
 const (
-	// Version is the current version of the plaid-go library
+	// Version is the current version of the flyline-go library
 	Version = "7.3.0"
 )

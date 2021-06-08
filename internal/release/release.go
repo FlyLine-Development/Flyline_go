@@ -43,7 +43,7 @@ func validateArguments(args []string) (releaseType, error) {
 
 // Main is the entry point into the release script
 func Main(args []string) error {
-	pkgName := "github.com/plaid/plaid-go"
+	pkgName := "github.com/flyline-development/flyline_go"
 	pkg, err := build.Import(pkgName, "", build.FindOnly)
 	if err != nil {
 		return err
@@ -97,8 +97,8 @@ func Main(args []string) error {
 func commitAndTagRepo(r *git.Repository, w *git.Worktree, newVersion string) error {
 	now := time.Now()
 	signature := object.Signature{
-		Name:  "Plaid",
-		Email: "api@plaid.com",
+		Name:  "Flyline",
+		Email: "development@flyline.io",
 		When:  now,
 	}
 

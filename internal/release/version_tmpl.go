@@ -9,14 +9,14 @@ import (
 	"text/template"
 
 	"github.com/coreos/go-semver/semver"
-	"github.com/plaid/plaid-go/internal"
+	"github.com/flyline-development/flyline_go/internal"
 )
 
 var versionTmpl = template.Must(template.New("var").Parse(strings.TrimSpace(`
 // NOTE - this file is auto-generated. DO NOT EDIT.
 package internal
 const (
-	// Version is the current version of the plaid-go library
+	// Version is the current version of the flyline_go library
 	Version = "{{.Version}}"
 )
 `) + "\n"))
