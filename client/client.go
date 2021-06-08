@@ -27,16 +27,16 @@ func NewClient(options ClientOptions) (client *Client, err error) {
 	}, nil
 }
 
-func (c *Client) Call(endpoint string, body []byte, v interface{}, requestmethod string) error {
+func (c *Client) Call(endpoint string, f_token string, body []byte, v interface{}, requestmethod string) error {
 	if requestmethod == "GET" {
-		req, err := c.newGetRequest(endpoint, bytes.NewReader(body), v)
+		req, err := c.newGetRequest(endpoint, f_token, bytes.NewReader(body), v)
 		if err != nil {
 			return err
 		}
 
 		return c.do(req, v)
 	} else {
-		req, err := c.newPostRequest(endpoint, bytes.NewReader(body), v)
+		req, err := c.newPostRequest(endpoint, f_token, bytes.NewReader(body), v)
 		if err != nil {
 			return err
 		}
@@ -46,7 +46,7 @@ func (c *Client) Call(endpoint string, body []byte, v interface{}, requestmethod
 }
 
 // newRequest is used by Call to generate a http.Request with appropriate headers.
-func (c *Client) newPostRequest(endpoint string, body io.Reader, v interface{}) (*http.Request, error) {
+func (c *Client) newPostRequest(endpoint string, f_token string, body io.Reader, v interface{}) (*http.Request, error) {
 	if !strings.HasPrefix(endpoint, "/") {
 		endpoint = "/" + endpoint
 	}
@@ -57,10 +57,11 @@ func (c *Client) newPostRequest(endpoint string, body io.Reader, v interface{}) 
 	}
 
 	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Authorization", "FToken "+f_token)
 	return req, nil
 }
 
-func (c *Client) newGetRequest(endpoint string, body io.Reader, v interface{}) (*http.Request, error) {
+func (c *Client) newGetRequest(endpoint string, f_token string, body io.Reader, v interface{}) (*http.Request, error) {
 	if !strings.HasPrefix(endpoint, "/") {
 		endpoint = "/" + endpoint
 	}
@@ -71,6 +72,7 @@ func (c *Client) newGetRequest(endpoint string, body io.Reader, v interface{}) (
 	}
 
 	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Authorization", "FToken "+f_token)
 	return req, nil
 }
 

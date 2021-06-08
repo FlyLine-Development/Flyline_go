@@ -27,22 +27,19 @@ type GetAirportResponse struct {
 }
 
 type getAirportRequest struct {
-	FToken string `json:"f_token"`
 }
 
 func (c *Client) GetAirportList(f_token string) (resp GetAirportListResponse, err error) {
 	if f_token == "" {
 		return resp, errors.New("/api/airports - FToken must be specified")
 	}
-	req := getAirportRequest{
-		FToken: f_token,
-	}
+	req := getAirportRequest{}
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/airports", jsonBody, &resp)
+	err = c.Call("/airports", f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -55,16 +52,14 @@ func (c *Client) GetAirportByAirportIataCode(f_token string, iata_code string) (
 		return c.GetAirportList(f_token)
 	}
 
-	req := getAirportRequest{
-		FToken: f_token,
-	}
+	req := getAirportRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/airports/"+iata_code, jsonBody, &resp)
+	err = c.Call("/airports/"+iata_code, f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -77,15 +72,13 @@ func (c *Client) GetAirportByCityIataCode(f_token string, iata_code string) (res
 		return c.GetAirportList(f_token)
 	}
 
-	req := getAirportRequest{
-		FToken: f_token,
-	}
+	req := getAirportRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/api/cities/"+iata_code+"/airports", jsonBody, &resp)
+	err = c.Call("/api/cities/"+iata_code+"/airports", f_token, jsonBody, &resp)
 	return resp, err
 }

@@ -27,22 +27,19 @@ type GetCityResponse struct {
 }
 
 type getCityRequest struct {
-	FToken string `json:"f_token"`
 }
 
 func (c *Client) GetCityList(f_token string) (resp GetCityListResponse, err error) {
 	if f_token == "" {
 		return resp, errors.New("/api/cities - FToken must be specified")
 	}
-	req := getCityRequest{
-		FToken: f_token,
-	}
+	req := getCityRequest{}
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/cities", jsonBody, &resp)
+	err = c.Call("/cities", f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -55,15 +52,13 @@ func (c *Client) GetCityByIataCode(f_token string, iata_code string) (resp GetCi
 		return c.GetCityList(f_token)
 	}
 
-	req := getCityRequest{
-		FToken: f_token,
-	}
+	req := getCityRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/cities/"+iata_code, jsonBody, &resp)
+	err = c.Call("/cities/"+iata_code, f_token, jsonBody, &resp)
 	return resp, err
 }

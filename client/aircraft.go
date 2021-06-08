@@ -26,23 +26,19 @@ type GetAircraftResponse struct {
 	Aircraft Aircraft `json:"data"`
 }
 
-type getAircraftRequest struct {
-	FToken string `json:"f_token"`
-}
+type getAircraftRequest struct{}
 
 func (c *Client) GetAircraftList(f_token string) (resp GetAircraftListResponse, err error) {
 	if f_token == "" {
 		return resp, errors.New("/api/aircraft - FToken must be specified")
 	}
-	req := getAircraftRequest{
-		FToken: f_token,
-	}
+	req := getAircraftRequest{}
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/aircraft", jsonBody, &resp)
+	err = c.Call("/aircraft", f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -55,15 +51,13 @@ func (c *Client) GetAircraftByIataCode(f_token string, iata_code string) (resp G
 		return c.GetAircraftList(f_token)
 	}
 
-	req := getAircraftRequest{
-		FToken: f_token,
-	}
+	req := getAircraftRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/aircraft/"+iata_code, jsonBody, &resp)
+	err = c.Call("/aircraft/"+iata_code, f_token, jsonBody, &resp)
 	return resp, err
 }

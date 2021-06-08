@@ -26,23 +26,19 @@ type GetCabinResponseWithParams struct {
 	Cabin map[string][]Cabin `json:""`
 }
 
-type getCabinRequest struct {
-	FToken string `json:"f_token"`
-}
+type getCabinRequest struct{}
 
 func (c *Client) GetCabinList(f_token string) (resp GetCabinListResponse, err error) {
 	if f_token == "" {
 		return resp, errors.New("/api/cabin-booking - FToken must be specified")
 	}
-	req := getCabinRequest{
-		FToken: f_token,
-	}
+	req := getCabinRequest{}
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/api/cabin-booking", jsonBody, &resp)
+	err = c.Call("/api/cabin-booking", f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -51,15 +47,13 @@ func (c *Client) GetCabinWithParams(f_token string, carrier string, cabin_class 
 		return resp, errors.New("/api/cabin-booking - FToken must be specified")
 	}
 
-	req := getCabinRequest{
-		FToken: f_token,
-	}
+	req := getCabinRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/api/cabin-booking/?carrier="+carrier+"&cabin_class"+cabin_class, jsonBody, &resp)
+	err = c.Call("/api/cabin-booking/?carrier="+carrier+"&cabin_class"+cabin_class, f_token, jsonBody, &resp)
 	return resp, err
 }

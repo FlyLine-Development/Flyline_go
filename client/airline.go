@@ -27,22 +27,19 @@ type GetAirlineResponse struct {
 }
 
 type getAirlineRequest struct {
-	FToken string `json:"f_token"`
 }
 
 func (c *Client) GetAirlineList(f_token string) (resp GetAirlineListResponse, err error) {
 	if f_token == "" {
 		return resp, errors.New("/api/airlines - FToken must be specified")
 	}
-	req := getAirlineRequest{
-		FToken: f_token,
-	}
+	req := getAirlineRequest{}
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/airlines", jsonBody, &resp)
+	err = c.Call("/airlines", f_token, jsonBody, &resp)
 	return resp, err
 }
 
@@ -55,15 +52,13 @@ func (c *Client) GetAirlineByIataCode(f_token string, iata_code string) (resp Ge
 		return c.GetAirlineList(f_token)
 	}
 
-	req := getAirlineRequest{
-		FToken: f_token,
-	}
+	req := getAirlineRequest{}
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
 		return resp, err
 	}
 
-	err = c.Call("/airlines/"+iata_code, jsonBody, &resp)
+	err = c.Call("/airlines/"+iata_code, f_tokenjsonBody, &resp)
 	return resp, err
 }
