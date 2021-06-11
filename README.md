@@ -27,20 +27,20 @@ GoDoc: [![GoDoc](https://godoc.org/github.com/flyline-development/flyline_go?sta
 
 ### Calling Endpoints
 
-To call an endpoint you must create a `Client` object.
+To call an endpoint you must set Token using `SetToken()` object.
 
 ```go
 import (
     "net/http"
     "os"
 
-    "github.com/flyline-development/flyline_go/client"
+    "github.com/flyline-development/flyline_go"
 )
 
-clientOptions := flyline.ClientOptions{
-    &http.Client{}, // This parameter is optional
-}
-client, err := flyline.NewClient(clientOptions)
+
+flyline := flyline.SetToken("test_####")
+response := flyline.GetSeatTypes()
+
 ```
 
 Each endpoint returns an object which contains the parsed JSON from the HTTP response.
