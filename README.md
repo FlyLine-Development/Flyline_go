@@ -21,7 +21,7 @@ $ go get github.com/flyline-development/flyline-go
 
 The module supports all Flyline API endpoints.
 
-GoDoc: [![GoDoc](https://godoc.org/github.com/flyline-development/flyline-go?status.svg)](https://godoc.org/github.com/flyline-development/flyline-go/client)
+GoDoc: [![GoDoc](https://godoc.org/github.com/flyline-development/flyline_go?status.svg)](https://godoc.org/github.com/flyline-development/flyline-go/client)
 
 ## Getting Started
 
@@ -34,7 +34,7 @@ import (
     "net/http"
     "os"
 
-    "github.com/flyline-development/flyline-go/client"
+    "github.com/flyline-development/flyline_go/client"
 )
 
 clientOptions := flyline.ClientOptions{
@@ -52,6 +52,6 @@ Each endpoint returns an object which contains the parsed JSON from the HTTP res
 
 ## Support
 
-Open an [issue](https://github.com/flyline-development/flyline-go/issues/new)!
+Open an [issue](https://github.com/flyline-development/flyline_go/issues/new)!
 
 ## License
