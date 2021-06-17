@@ -82,11 +82,12 @@ func sendGetRequest(endpoint string) string {
 func GetAirfares(dataJsonStr string) string {
 	return sendPostRequest("/api/flights/shop/", dataJsonStr)
 }
-
+// Update the code of api.
 func GetAirattributesByFlightNumber(dataJsonStr string) string {
 	return sendPostRequest("/search/attributes/flight/", dataJsonStr)
 }
 
+// Update the code of api.
 func GetAirattributesByRoute(dataJsonStr string) string {
 	return sendPostRequest("/search/attributes/route/", dataJsonStr)
 }
