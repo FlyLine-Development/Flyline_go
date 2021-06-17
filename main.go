@@ -84,11 +84,11 @@ func GetAirfares(dataJsonStr string) string {
 }
 
 func GetAirattributesByFlightNumber(dataJsonStr string) string {
-	return sendPostRequest("/api/search/amenities/", dataJsonStr)
+	return sendPostRequest("/search/attributes/flight/", dataJsonStr)
 }
 
 func GetAirattributesByRoute(dataJsonStr string) string {
-	return sendPostRequest("/api/amenities/search/route", dataJsonStr)
+	return sendPostRequest("/search/attributes/route/", dataJsonStr)
 }
 
 func GetSchedulesByFlightNumber(dataJsonStr string) string {
